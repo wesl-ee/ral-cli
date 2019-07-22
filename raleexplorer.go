@@ -1,11 +1,12 @@
 package main
 
 import (
-	"ral"
 	"fmt"
 	"net/url"
 	"flag"
 	"os"
+
+	"github.com/wesleycoakley/ral"
 )
 
 type CommandSet map[string]*string

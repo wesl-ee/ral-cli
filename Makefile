@@ -1,7 +1,7 @@
 GOBUILD=go build
 GOGET=go get
 
-RAL_LIB=$(GOPATH)/src/ral/*.go
+RAL_LIB=$(GOPATH)/src/github.com/wesleycoakley/ral/*.go
 
 all: raleexplorer
 

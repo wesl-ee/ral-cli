@@ -1,8 +1,9 @@
 package main
 
 import (
-	"ral"
 	"strconv"
+
+	"github.com/wesleycoakley/ral"
 )
 
 func View(s ral.Site, flags CommandSet, args []string) {
