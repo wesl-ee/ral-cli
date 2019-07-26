@@ -41,7 +41,8 @@ The RAL CLI tool reads from a TOML-formatted configuration file; it searches
 the following locations (in order) for a proper file:
 
 1. ./config.toml
-2. ~/.config.toml
+2. ~/.ral/config.toml
+3. ~/.ralrc
 
 Please copy the included `config.template.toml` file to one of the above
 places and edit it to match your use case.

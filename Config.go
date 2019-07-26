@@ -13,9 +13,10 @@ type Config struct {
 
 func FindConfig() (string) {
 	home, _ := os.UserHomeDir()
-	locations := [2]string{
+	locations := [3]string{
 		"config.toml",
-		path.Join(home, ".config.toml") }
+		path.Join(home, ".ral", "config.toml"),
+		path.Join(home, ".ralrc") }
 
 	for _, l := range locations {
 		if FileExists(l) { return l }
