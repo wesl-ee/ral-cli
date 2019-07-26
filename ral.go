@@ -12,19 +12,16 @@ import (
 type CommandSet map[string]*string
 
 var Commands = map[string]*flag.FlagSet {
-	"view": flag.NewFlagSet("view", flag.ExitOnError)}
+	"view": flag.NewFlagSet("view", flag.ExitOnError) }
+
+var CommandArgs = map[string]*CommandSet {
+	"view": &ViewFlags }
 
 var ViewFlags = CommandSet {
 	"format": Commands["view"].String(
 		"format",
 		"simple",
 		"Command output format") }
-
-var GlobalFlags = CommandSet {
-	"config": flag.String(
-		"config",
-		"config.toml",
-		"Configuration file") }
 
 var Flags = map[string]CommandSet {
 	"view": ViewFlags }
@@ -33,17 +30,29 @@ var Formats = map[string]ral.Format {
 	"simple": ral.FormatSimple,
 	"json": ral.FormatJson }
 
+func InitFlags() {
+	for name, command := range Commands {
+		fset := *CommandArgs[name]
+		fset["config"] = command.String(
+			"config",
+			"",
+			"Configuration file") } }
+
 func main() {
 	if len(os.Args) < 2 {
 		GenericHelp()
 		os.Exit(1) }
 
-	flag.Parse()
-	switch(os.Args[1]) {
-		case "view":
-			Commands["view"].Parse(os.Args[2:]) }
+	InitFlags()
+	flagset := Commands[os.Args[1]]
+	argset := CommandArgs[os.Args[1]]
+	flagset.Parse(os.Args[2:])
 
-	config, err := ReadConfig("config.toml")
+	configFile := *(*argset)["config"]
+	if configFile == "" {
+		configFile = FindConfig() }
+
+	config, err := ReadConfig(configFile)
 	if err != nil { panic(err) }
 
 	s := ral.New()

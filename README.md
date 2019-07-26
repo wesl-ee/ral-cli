@@ -32,7 +32,19 @@ need to worry about unless you're interested) but I'll list them here
 for easy reference:
 
 - Naoina's [TOML parser / encoder](https://github.com/naoina/toml)
-- My [RAL API for Golang](https://github.com/wesleycoakley/ral)
+- My [RAL API for Golang](https://github.com/wesleycoakley/ral-api)
+
+Configuration
+-------------
+
+The RAL CLI tool reads from a TOML-formatted configuration file; it searches
+the following locations (in order) for a proper file:
+
+1. ./config.toml
+2. ~/.config.toml
+
+Please copy the included `config.template.toml` file to one of the above
+places and edit it to match your use case.
 
 Contributing
 ------------
