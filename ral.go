@@ -6,7 +6,7 @@ import (
 	"flag"
 	"os"
 
-	"github.com/wesleycoakley/ral"
+	"github.com/wesleycoakley/ral-api"
 )
 
 type CommandSet map[string]*string
@@ -20,6 +20,12 @@ var ViewFlags = CommandSet {
 		"simple",
 		"Command output format") }
 
+var GlobalFlags = CommandSet {
+	"config": flag.String(
+		"config",
+		"config.toml",
+		"Configuration file") }
+
 var Flags = map[string]CommandSet {
 	"view": ViewFlags }
 
@@ -32,25 +38,26 @@ func main() {
 		GenericHelp()
 		os.Exit(1) }
 
+	flag.Parse()
+	switch(os.Args[1]) {
+		case "view":
+			Commands["view"].Parse(os.Args[2:]) }
+
 	config, err := ReadConfig("config.toml")
 	if err != nil { panic(err) }
 
 	s := ral.New()
 	s.URL = url.URL{
 		Scheme: config.Scheme,
-		Path: config.Site }
-
-	switch(os.Args[1]) {
-		case "view":
-			Commands["view"].Parse(os.Args[2:]) }
+		Path: config.Endpoint }
 
 	if Commands["view"].Parsed() {
 		View(s, ViewFlags, Commands["view"].Args()) } }
 
 func GenericHelp() {
 	fmt.Print(
-`raleexplorer - Barebones CLI to read / post on an RAL Textboard
-usage: raleexplorer [command] [arguments]
+`ral - Barebones CLI to read / post on an RAL Textboard
+usage: ral [command] [arguments]
 
 Commands:
 	view - View a Continuity, Year, or Topic

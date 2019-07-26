@@ -1,5 +1,5 @@
-RalEExplorer
-============
+RAL (CLI Tool)
+==============
 
 Barebones CLI to read / post on textboards driven by the RAL software
 
@@ -11,7 +11,7 @@ running at [RalEE.org](https://ralee.org/) which (as part of the standard
 install) sports an API which this package (and my [RAL Textboard API for
 Golang](https://github.com/wesleycoakley/ral) leverage).
 
-RalEExplorer is not a fancy reader; it is aimed at
+This is not a fancy reader; it is aimed at
 [techies and hackers](http://catb.org/jargon/html/H/hacker.html) who
 do not shy away from UNIX-style utilities and who use pipes,
 filters, and file redirections regularly. This makes the software very
@@ -23,12 +23,12 @@ Installation
 Ensure your `$GOPATH` is configured, then run:
 
 ```
-go get github.com/wesleycoakley/raleexplorer
+go get github.com/wesleycoakley/ral
 ```
 
-This will pull all dependencies and install the raleexplorer binary in
-$GOPATH/bin; there are only a handful of deps. anyway (which you don't
-need to worry about unless you are so interested) but I list them here
+This will pull all dependencies and install the `raleexplorer` binary in
+`$GOPATH/bin`; there are only a handful of deps. (which you don't
+need to worry about unless you're interested) but I'll list them here
 for easy reference:
 
 - Naoina's [TOML parser / encoder](https://github.com/naoina/toml)
@@ -43,4 +43,4 @@ have a suggestion or want to work together.
 License
 -------
 
-X11 License (available in the source tree as `/LICENSE`
+X11 License (available in the source tree as `/LICENSE`)

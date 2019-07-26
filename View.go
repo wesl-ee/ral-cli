@@ -3,7 +3,7 @@ package main
 import (
 	"strconv"
 
-	"github.com/wesleycoakley/ral"
+	"github.com/wesleycoakley/ral-api"
 )
 
 func View(s ral.Site, flags CommandSet, args []string) {

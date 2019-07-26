@@ -8,7 +8,7 @@ import (
 
 type Config struct {
 	Scheme string `toml:"scheme"`
-	Site string `toml:"site"` }
+	Endpoint string `toml:"endpoint"` }
 
 func ReadConfig(path string) (config *Config, err error) {
 	config = new(Config)
