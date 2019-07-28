@@ -28,6 +28,8 @@ var Flags = map[string]CommandSet {
 
 var Formats = map[string]ral.Format {
 	"simple": ral.FormatSimple,
+	"csv": ral.FormatCSV,
+	"array": ral.FormatArray,
 	"json": ral.FormatJson }
 
 func InitFlags() {
