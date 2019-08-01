@@ -22,6 +22,10 @@ var ViewFlags = CommandSet {
 		"nowrap",
 		false,
 		"Do not wrap text (only certain formats)"),
+	"wrap": Commands["view"].Int(
+		"wrap",
+		80,
+		"Wrap text to a certain number of characters (only certain formats)"),
 	"format": Commands["view"].String(
 		"format",
 		"simple",

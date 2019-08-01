@@ -24,18 +24,19 @@ func View(s ral.Site, flags CommandSet, args []string) {
 
 	format := Formats[*flags["format"].(*string)]
 	nowrap := *flags["nowrap"].(*bool)
+	wrap := *flags["wrap"].(*int)
 
 	if nowrap && format == ral.FormatSimple {
-		format = ral.FormatSimpleNoWrap }
+		wrap = 0 }
 
 	if topic > 0 {
 		r, err := s.Replies(continuity, year, topic)
 		if err != nil { panic(err) }
-		r.Print(format)
+		r.Print(format, wrap)
 	} else if year > 0 {
 		t, err := s.Topics(continuity, year)
 		if err != nil { panic(err) }
-		t.Print(format)
+		t.Print(format, wrap)
 	} else if continuity != "" {
 		y, err := s.Years(continuity)
 		if err != nil { panic(err) }
