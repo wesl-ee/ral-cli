@@ -25,6 +25,9 @@ func View(s ral.Site, flags CommandSet, args []string) {
 	format := Formats[*flags["format"]]
 
 	if topic > 0 {
+		r, err := s.Replies(continuity, year, topic)
+		if err != nil { panic(err) }
+		r.Print(format)
 	} else if year > 0 {
 		t, err := s.Topics(continuity, year)
 		if err != nil { panic(err) }
