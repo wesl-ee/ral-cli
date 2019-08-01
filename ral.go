@@ -9,7 +9,7 @@ import (
 	"github.com/wesleycoakley/ral-api"
 )
 
-type CommandSet map[string]*string
+type CommandSet map[string]interface{}
 
 var Commands = map[string]*flag.FlagSet {
 	"view": flag.NewFlagSet("view", flag.ExitOnError) }
@@ -18,6 +18,10 @@ var CommandArgs = map[string]*CommandSet {
 	"view": &ViewFlags }
 
 var ViewFlags = CommandSet {
+	"nowrap": Commands["view"].Bool(
+		"nowrap",
+		false,
+		"Do not wrap text (only certain formats)"),
 	"format": Commands["view"].String(
 		"format",
 		"simple",
@@ -50,7 +54,7 @@ func main() {
 	argset := CommandArgs[os.Args[1]]
 	flagset.Parse(os.Args[2:])
 
-	configFile := *(*argset)["config"]
+	configFile := *(*argset)["config"].(*string)
 	if configFile == "" {
 		configFile = FindConfig() }
 

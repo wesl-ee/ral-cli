@@ -22,7 +22,11 @@ func View(s ral.Site, flags CommandSet, args []string) {
 		topic, err = strconv.Atoi(args[2])
 		if err != nil { return } }
 
-	format := Formats[*flags["format"]]
+	format := Formats[*flags["format"].(*string)]
+	nowrap := *flags["nowrap"].(*bool)
+
+	if nowrap && format == ral.FormatSimple {
+		format = ral.FormatSimpleNoWrap }
 
 	if topic > 0 {
 		r, err := s.Replies(continuity, year, topic)
