@@ -48,6 +48,9 @@ func InitFlags() {
 			"Configuration file") } }
 
 func main() {
+	var err error
+	var config *Config
+
 	if len(os.Args) < 2 {
 		GenericHelp()
 		os.Exit(1) }
@@ -57,12 +60,12 @@ func main() {
 	argset := CommandArgs[os.Args[1]]
 	flagset.Parse(os.Args[2:])
 
-	configFile := *(*argset)["config"].(*string)
-	if configFile == "" {
-		configFile = FindConfig() }
-
-	config, err := ReadConfig(configFile)
-	if err != nil { panic(err) }
+	if configFile := *(*argset)["config"].(*string); configFile != "" {
+		config, err = ReadConfig(configFile)
+		if err != nil { panic(err) }
+	} else {
+		config = ReadSystemConfig()
+	}
 
 	s := ral.New()
 	s.URL = url.URL{

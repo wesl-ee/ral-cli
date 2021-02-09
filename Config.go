@@ -11,6 +11,10 @@ type Config struct {
 	Scheme string `toml:"scheme"`
 	Endpoint string `toml:"endpoint"` }
 
+var DefaultConfig = Config {
+	Scheme: "https",
+	Endpoint: "ralee.org/api" }
+
 func FindConfig() (string) {
 	home, _ := os.UserHomeDir()
 	locations := [3]string{
@@ -29,6 +33,15 @@ func FileExists(fpath string) (bool) {
 	if os.IsNotExist(err) {
 		return false }
 	return !info.IsDir()
+}
+
+func ReadSystemConfig() (config *Config) {
+	if tryFile := FindConfig(); tryFile != "" {
+		config, _ := ReadConfig(tryFile)
+		return config
+	}
+
+	return &DefaultConfig
 }
 
 func ReadConfig(fpath string) (config *Config, err error) {
